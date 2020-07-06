@@ -11,21 +11,30 @@
  * @return {number}
  */
 var removeElement = function(nums, val) {
-    let temp;
-    let len = nums.length;
-    for (let i = 0; i < len; i ++) {
-        if (nums[i] === val) {
-            temp = nums[i]
-            nums[i] = nums[i + 1]
-            nums[i + 1] = temp
+    let i = 0, len = nums.length
+    let j = len - 1;
+    do {
+       let ni = nums[i]
+       let nj = nums[j]
+       if (nj != val && ni != val) {
+           i ++
+           continue
+       }
+       if (ni === val && nj != val) {
+            nums[i] = nj
+            nums[j] = val
+            i ++
+            j --
+            continue
+       }
+       j --
+       
+    } while (i < j)
+    for (let z = 0; z < len; z ++) {
+        if (nums[z] === val) {
+            return z
         }
     }
-    for (let i = 0; i < len; i ++) {
-        if (nums[i] === val) {
-            return i
-        }
-    }
-    return 0
 };
 // @lc code=end
 
