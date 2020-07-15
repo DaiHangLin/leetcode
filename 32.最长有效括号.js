@@ -10,24 +10,33 @@
  * @return {number}
  */
 var longestValidParentheses = function(s) {
-    let max = 0
-    let stack = []
-    stack.push(-1)
+    let left = 0, right = 0, maxlength = 0;
     for (let i = 0; i < s.length; i++) {
         if (s[i] == '(') {
-            stack.push(i)
+            left++;
         } else {
-            stack.pop()
-            if (stack.length == 0) {
-                stack.push(i)
-            } else {
-                const j = stack.pop()
-                max = Math.max(max, i - j)
-                stack.push(j)
-            }
+            right++;
         }
-    } 
-    return max
+        if (left == right) {
+            maxlength = Math.max(maxlength, 2 * right);
+        } else if (right > left) {
+            left = right = 0;
+        }
+    }
+    left = right = 0;
+    for (let i = s.length - 1; i >= 0; i--) {
+        if (s[i] == '(') {
+            left++;
+        } else {
+            right++;
+        }
+        if (left == right) {
+            maxlength = Math.max(maxlength, 2 * left);
+        } else if (left > right) {
+            left = right = 0;
+        }
+    }
+    return maxlength;
 };
 // @lc code=end
 
