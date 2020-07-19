@@ -11,25 +11,23 @@
  * @return {number[]}
  */
 var searchRange = function(nums, target) {
-    let min = len = nums.length, max = -1
-    let left = 0, right = len - 1
-    let found = false
-    while (left <= right && !found) {
-        if (nums[left] == target) {
-            min = left
-            found = true
-        } else {
-            left ++
+    function findIndex(leftPart) {
+        let lo = 0, hi = nums.length;
+        while (lo < hi) {
+            let mid = Math.floor((lo + hi) / 2)
+            if (nums[mid] > target || (leftPart && target == nums[mid])) {
+                hi = mid
+            } else {
+                lo = mid + 1
+            }
         }
-        if (nums[right] == target) {
-            max = right
-            found = found && true
-        } else {
-            found = false
-            right --
-        }
+        return lo
     }
-    return found ? [min, max] : [-1, -1]
+    let leftIndex = findIndex(true)
+    if (leftIndex == nums.length || nums[leftIndex] != target) {
+        return [-1, -1]
+    }
+    return [leftIndex, findIndex(false) - 1]
 };
 // @lc code=end
 
