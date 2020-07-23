@@ -17,17 +17,18 @@
  * @return {number[]}
  */
 var inorderTraversal = function(root) {
-    let result = []
-    function traversal(root) {
-        if (root == null) {
-            return
+     let nums = [];
+    let stack = [];
+    while(root || stack.length){
+        while(root){
+            stack.push(root);
+            root = root.left;
         }
-        traversal(root.left)
-        result.push(root.val)
-        traversal(root.right)
+        root = stack.pop();
+        nums.push(root.val);
+        root = root.right;
     }
-    traversal(root)
-    return result
+    return nums;
 };
 // @lc code=end
 
