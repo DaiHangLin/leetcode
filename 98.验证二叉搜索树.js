@@ -18,7 +18,6 @@
  */
 const helper = (root, lower, upper) => {
     if (root === null) return true;
-    console.log('lower', lower, 'upper', upper, 'val', root.val)
     if (root.val <= lower || root.val >= upper) return false;
     return helper(root.left, lower, root.val) && helper(root.right, root.val, upper);
 }
