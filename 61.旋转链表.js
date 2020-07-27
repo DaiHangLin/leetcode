@@ -20,22 +20,25 @@
 var rotateRight = function(orig, k) {
     let len = 0
     let head = orig
-    let map = {}
     while (head != null) {
         len ++
-        map[len] = head
+        if (head.next == null) {
+            head.next = orig
+            head = orig
+            break
+        }
         head = head.next
     }
     let rk = k % len
 
-
-    for (let i = 0; i < rk; i ++) {
-        let node = map[len - i]
-        map[len -i - 1].next = null
-        node.next = orig
-        orig = node
+    let newHead
+    for (let i = 0; i < (len - rk); i ++) {
+        newHead = head
+        head = head.next
     }
-    return orig
+    if (newHead)
+        newHead.next = null
+    return head
 };
 // @lc code=end
 
