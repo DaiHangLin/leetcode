@@ -10,28 +10,36 @@
  * @return {void} Do not return anything, modify nums in-place instead.
  */
 var sortColors = function(nums) {
-    function quickSort(q) {
-        let lessList = [], greaterList = [], pivotList = []
-        if (q.length == 0 || q.length == 1) {
-            return q
-        }
-        let len = q.length
-        let pivot = Math.floor(len / 2) 
-        for (let i = 0; i < len; i ++) {
-            if (q[i] < q[pivot]) {
-                lessList.push(q[i])
-            } else if (q[i] > q[pivot]) {
-                greaterList.push(q[i])
-            } else {
-                pivotList.push(q[pivot])
+    function swap(a, i, j) {
+        let temp = a[i]
+        a[i] = a[j]
+        a[j] = temp
+    }
+    function paritition(a, left, right, pivotIndex) {
+        pivotValue = a[pivotIndex]
+        swap(a, pivotIndex, right)
+        let storeIndex = left
+        for (let i = left; i < right; i ++) {
+            if (a[i] <= pivotValue) {
+                swap(a, i, storeIndex)
+                storeIndex ++
             }
         }
-        return [...quickSort(lessList), ...pivotList, ...quickSort(greaterList)]
+        swap(a, storeIndex, right)
+        console.log('a', a, 'storeIndex', storeIndex, 'pivotValue', pivotValue, 'left', left, 'right', right)
+        return storeIndex
     }
 
-    nums = quickSort(nums)
-    console.log('nums', nums)
+    function quickSort(a, left, right) {
+        if (right > left) {
+            let pivotIndex = Math.floor(left + (right - left) / 2)
+            let pivotNewIndex = paritition(a, left, right, pivotIndex)
+            quickSort(a, left, pivotNewIndex - 1)
+            quickSort(a, pivotNewIndex + 1, right)
+        }
+    }
 
+    quickSort(nums, 0, nums.length - 1)
 };
 // @lc code=end
 
