@@ -70,3 +70,6 @@ function partition(a, left, right, pivotIndex)
 - 左边两边序列的最大值，分别再次重复拆分，直到只有一个元素
 - 中间序列的最大值，l,m,r  求 m -> l  的最大值  + m + m -> r 的最大值
 
+## 线性
+- _._
+
