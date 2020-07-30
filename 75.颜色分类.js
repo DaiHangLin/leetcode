@@ -22,6 +22,7 @@ var sortColors = function(nums) {
         for (let i = left; i < right; i ++) {
             if (a[i] <= pivotValue) {
                 swap(a, i, storeIndex)
+                console.log('a', a, 'storeIndex', storeIndex, 'pivotValue', pivotValue, 'left', left, 'right', right)              
                 storeIndex ++
             }
         }
