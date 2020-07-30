@@ -31,3 +31,35 @@
     }
 ```
 
+# 原地分割的快速排序, 减少空间复杂度
+
+伪代码
+
+```javascript
+ procedure quicksort(a, left, right)
+     if right > left
+         select a pivot value a[pivotIndex]
+         pivotNewIndex := partition(a, left, right, pivotIndex)
+         quicksort(a, left, pivotNewIndex-1)
+         quicksort(a, pivotNewIndex+1, right)
+ 
+
+function partition(a, left, right, pivotIndex)
+ {
+     pivotValue = a[pivotIndex]
+     swap(a[pivotIndex], a[right]) // 把pivot移到結尾
+     storeIndex = left
+     for i from left to right-1
+     {
+         if a[i] <= pivotValue
+          {
+             swap(a[storeIndex], a[i])
+             storeIndex = storeIndex + 1
+          }
+     }
+     swap(a[right], a[storeIndex]) // 把pivot移到它最後的地方
+     return storeIndex
+ }
+
+```
+
