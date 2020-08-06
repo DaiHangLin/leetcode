@@ -33,7 +33,6 @@ var permuteUnique = function(nums) {
             if (used[i]) {
                 continue
             }
-             console.log('i', i, 'nums[i]', nums[i], 'nums[i - 1]', nums[i - 1], `used[${i}]`, used[i])
 
             if ((i > 0  && nums[i] == nums[i - 1]) && !used[i - 1]) {
                 continue
