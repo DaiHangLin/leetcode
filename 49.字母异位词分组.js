@@ -13,28 +13,31 @@ var groupAnagrams = function(strs) {
     let result = []
     let map = {}
     let len = strs.length
+    
+    let cs = []
+
+    for (let i = 0; i < len; i ++) {
+        let t = strs[i]
+        cs.push(t.split('').sort().join(''))
+    }
+    
     for (let i = 0; i < len; i ++) {
         if (map[i]) {
             continue
         }
-        let d = strs[i]
-        result[i] = result[i] || [d]
+        let d = cs[i]
+        result[i] = result[i] || [strs[i]]
         for (let j = i + 1; j < len; j ++) {
-            let t = strs[j]
+            if (map[j]) {
+                continue
+            }   
+            let t = cs[j]
             if (d.length != t.length) {
                 continue
             }
-            let at = []
-            for (let z = 0; z < t.length; z ++) {
-                at.push(t[z])
-            }
-            let ad = []
-            for (let z = 0; z < d.length; z++) {
-                ad.push(d[z])
-            }
-            if (at.sort().join('') === ad.sort().join('')) {
+            if (d === t) {
                 map[j] = true
-                result[i].push(t)
+                result[i].push(strs[j])
             }
         }
     }
